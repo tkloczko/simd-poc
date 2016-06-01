@@ -1,7 +1,8 @@
 # Summary
-
+<p>
 The goal of this code snippet is to investigate the performance gain
 resulting from the use of SIMD features provided by openMP 4.5.
+</p>
 
 Two cases are studied:
 - the inner product of two double floating point vectors
@@ -38,7 +39,7 @@ Two compilers are tested:
 
 ## Inner Product
 
-The inner product is performed 1000023 times, the vector size is 256.
+The inner product is performed <strong>1000023 times</strong>, the vector size is <strong>256</strong>.
 
 ### GCC 6.1.0
 
