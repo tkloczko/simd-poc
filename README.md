@@ -18,7 +18,7 @@ The hardware is Intel with 4 Cores i7-5600U CPU @ 2.60GHz featuring AVX2.
 For both cases, three kinds of strategy are followed:
 - pure c or c++ for loop code
 - use of openMP SIMD pragma
-- use of intel intrinsecs
+- use of intel intrinsics
 
 In the case of the inner product, different containers are tested (std::vector, std::array, custom static aligned array).
 
