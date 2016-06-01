@@ -58,10 +58,7 @@ endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
-set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-include(GenerateExportHeader)
 
 if(APPLE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -I/usr/lib/c++/v1")
@@ -90,8 +87,8 @@ else(CMAKE_SIZEOF_VOID_P MATCHES 8)
 endif(CMAKE_SIZEOF_VOID_P MATCHES 8)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
-  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
+  message(STATUS "Setting build type to 'Release' as none was specified.")
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
@@ -120,12 +117,15 @@ include_directories(${dtkContainers_INCLUDE_DIRS})
 ##
 ## #################################################################
 
-add_executable(${PROJECT_NAME} main.cpp
+add_executable(INNER_PRODUCT dinnerproduct.cpp
   AlignedArray.h
   InnerProduct.h
   simd_double.h)
 
-target_link_libraries(${PROJECT_NAME} dtkContainers)
+add_executable(MATVEC_MULT dmatvecmult.cpp
+  AlignedArray.h
+  MatVecMult.h
+  simd_double.h)
 
 ######################################################################
 ### CMakeLists.txt ends here

@@ -15,6 +15,7 @@
 #pragma once
 
 #include <cstddef>
+#include <algorithm>
 #include <initializer_list>
 
 // /////////////////////////////////////////////////////////////////
@@ -60,8 +61,8 @@ public:
     inline std::size_t capacity(void) const { return NN; }
 
 public:
-    inline operator       double* ()       { return m_array; }
-    inline operator const double* () const { return m_array; }
+    inline operator       double *()       { return m_array; }
+    inline operator const double *() const { return m_array; }
 
     inline       double& operator [] (std::size_t i)       { return m_array[i]; }
     inline const double& operator [] (std::size_t i) const { return m_array[i]; }

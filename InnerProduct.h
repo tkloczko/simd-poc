@@ -110,81 +110,8 @@ inline double innerProductOmp(const AlignedArray<N>& lhs, const AlignedArray<N>&
     const double *l(lhs.data());
     const double *r(rhs.data());
 
-#pragma omp simd reduction(+:res) aligned(l,r:32)
+#pragma omp simd reduction(+:res)
     for (std::size_t i = 0UL; i < N; ++i) {
-        res += l[i] * r[i];
-    }
-
-    return res;
-}
-
-// /////////////////////////////////////////////////////////////////
-//
-// /////////////////////////////////////////////////////////////////
-
-#include <dtkContainers>
-
-template < std::size_t N, std::size_t Alignment >
-inline double innerProduct(const dtkStaticArray<double, N, Alignment>& lhs, const dtkStaticArray<double, N, Alignment>& rhs)
-{
-    double res = 0;
-
-    for (std::size_t i = 0UL; i < N; ++i) {
-        res += lhs[i] * rhs[i];
-    }
-
-    return res;
-}
-
-// /////////////////////////////////////////////////////////////////
-//
-// /////////////////////////////////////////////////////////////////
-
-inline double innerProduct(const dtk::Array<double>& lhs, const dtk::Array<double>& rhs)
-{
-    dtk::Array<double>::size_type N(lhs.size());
-    double res = 0;
-
-    for (std::size_t i = 0UL; i < N; ++i) {
-        res += lhs[i] * rhs[i];
-    }
-
-    return res;
-}
-
-// /////////////////////////////////////////////////////////////////
-//
-// /////////////////////////////////////////////////////////////////
-
-template < std::size_t N, std::size_t Alignment >
-inline double innerProductOmp(const dtkStaticArray<double, N, Alignment>& lhs, const dtkStaticArray<double, N, Alignment>& rhs)
-{
-    double res = 0;
-    const double *l(lhs.data());
-    const double *r(rhs.data());
-
-#pragma omp simd reduction(+:res) aligned(l, r:32)
-    for (std::size_t i = 0UL; i < N; i += 4UL) {
-        res += l[i] * r[i];
-    }
-
-    return res;
-}
-
-// /////////////////////////////////////////////////////////////////
-//
-// /////////////////////////////////////////////////////////////////
-
-inline double innerProductOmp(const dtk::Array<double>& lhs, const dtk::Array<double>& rhs)
-{
-    dtk::Array<double>::size_type N(lhs.size());
-
-    double res = 0;
-    const double *l(lhs.data());
-    const double *r(rhs.data());
-
-#pragma omp simd reduction(+:res) aligned(l, r:32)
-    for (std::size_t i = 0UL; i < N; i += 4UL) {
         res += l[i] * r[i];
     }
 
@@ -208,4 +135,4 @@ inline double innerProductOmp(const double *l, const double *r, const std::size_
 }
 
 //
-// dtkInnerProduct.h ends here
+// InnerProduct.h ends here
