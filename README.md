@@ -22,8 +22,7 @@ For both cases, three kinds of strategy are followed:
 
 In the case of the inner product, different containers are tested (std::vector, std::array, custom static aligned array).
 
-In the case of the matrix-vector multiplication, the extern loop is blocked in some functions. Moreover, only custom aligned array is
-used.
+In the case of the matrix-vector multiplication, the extern loop is blocked in some functions. Moreover, only custom aligned array is used.
 
 Two compilers are tested:
 - GCC **6.1.0** with following options **-O3 -mavx2 -fopenmp**
@@ -33,52 +32,52 @@ Two compilers are tested:
 
 ## Inner Product
 
-The operation is performed **1000023 times**, the vector size is **256**.
+The operation is performed **1,000,023 times**, the vector size is **256**.
 
 ### GCC 6.1.0
 
-| Method  |     Container  |   Time (us) |
-|---------|----------------|-------------|
-| C-loop  |   std::vector  | 0.00132797  |
-| C-loop  |  AlignedArray  | 0.00103898  |
-| Cpp     |    std::array  | 0.00140897  |
-| Cpp     |   std::vector  | 0.00123997  |
-| OpenMP  |  AlignedArray  | 0.000403991 |
-| SIMD    |  AlignedArray  | 0.000212995 |
+| Method         |     Container  |   Time (us) |
+|----------------|----------------|-------------|
+| C-loop         |   std::vector  | 0.00132797  |
+| C-loop         |  AlignedArray  | 0.00103898  |
+| Cpp            |    std::array  | 0.00140897  |
+| Cpp            |   std::vector  | 0.00123997  |
+| OpenMP         |  AlignedArray  | 0.000403991 |
+| simd intrinsic |  AlignedArray  | 0.000212995 |
 
 ### Intel 16.0.3
 
-| Method  |     Container  |   Time (us) |
-|---------|----------------|-------------|
-| C-loop  |   std::vector  | 0.000319993 |
-| C-loop  |  AlignedArray  | 0.000551987 |
-| Cpp     |    std::array  | 0.000229995 |
-| Cpp     |   std::vector  | 0.000408991 |
-| OpenMP  |  AlignedArray  | 0.000268994 |
-| SIMD    |  AlignedArray  | 0.000283993 |
+| Method         |     Container  |   Time (us) |
+|----------------|----------------|-------------|
+| C-loop         |   std::vector  | 0.000319993 |
+| C-loop         |  AlignedArray  | 0.000551987 |
+| Cpp            |    std::array  | 0.000229995 |
+| Cpp            |   std::vector  | 0.000408991 |
+| OpenMP         |  AlignedArray  | 0.000268994 |
+| simd intrinsic |  AlignedArray  | 0.000283993 |
 
 
 
 ## Matrix-Vector Multiplication
 
-The operation is performed **1000023 times** and the matrix size is **(M,N) = (64,64)**.
+The operation is performed **1,000,023 times** and the matrix size is **(M,N) = (64,64)**.
 
 ### GCC 6.1.0
 
-| Method       |     Container  |   Time (us) |
-|--------------|----------------|-------------|
-| C-blocked    |  AlignedArray  | 1.01194     |
-| C-pure       |  AlignedArray  | 3.02451     |
-| omp-blocked  |  AlignedArray  | 0.0128367   |
-| omp-pure     |  AlignedArray  | 1.01515     |
-| simd-pure    |  AlignedArray  | 0.00412391  |
+| Method         |     Container  |   Time (us) |
+|----------------|----------------|-------------|
+| C-blocked      |  AlignedArray  | 1.01194     |
+| C-pure         |  AlignedArray  | 3.02451     |
+| omp-blocked    |  AlignedArray  | 0.0128367   |
+| omp-pure       |  AlignedArray  | 1.01515     |
+| simd intrinsic |  AlignedArray  | 0.00412391  |
 
 ### Intel 16.0.3
 
-| Method       |     Container  |   Time (us) |
-|--------------|----------------|-------------|
-| C-blocked    |  AlignedArray  | 0.00334492  |
-| C-pure       |  AlignedArray  | 0.0042179   |
-| omp-blocked  |  AlignedArray  | 0.00343892  |
-| omp-pure     |  AlignedArray  | 0.00653285  |
-| simd-pure    |  AlignedArray  | 0.0042989   |
+| Method         |     Container  |   Time (us) |
+|----------------|----------------|-------------|
+| C-blocked      |  AlignedArray  | 0.00334492  |
+| C-pure         |  AlignedArray  | 0.0042179   |
+| omp-blocked    |  AlignedArray  | 0.00343892  |
+| omp-pure       |  AlignedArray  | 0.00653285  |
+| simd intrinsic |  AlignedArray  | 0.0042989   |
