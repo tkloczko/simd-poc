@@ -29,6 +29,10 @@
 double res = 0;
 double res0 = 0;
 
+// /////////////////////////////////////////////////////////////////
+//
+// /////////////////////////////////////////////////////////////////
+
 int CLikeTest()
 {
     AlignedArray<M*N> A;
@@ -53,6 +57,10 @@ int CLikeTest()
 
     return std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
+
+// /////////////////////////////////////////////////////////////////
+//
+// /////////////////////////////////////////////////////////////////
 
 int CLikeHelpedTest()
 {
@@ -79,6 +87,10 @@ int CLikeHelpedTest()
     return std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
+// /////////////////////////////////////////////////////////////////
+//
+// /////////////////////////////////////////////////////////////////
+
 int COmpTest()
 {
     AlignedArray<M*N> A;
@@ -103,6 +115,10 @@ int COmpTest()
     return std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
+// /////////////////////////////////////////////////////////////////
+//
+// /////////////////////////////////////////////////////////////////
+
 int COmpHelpedTest()
 {
     AlignedArray<M*N> A;
@@ -126,6 +142,10 @@ int COmpHelpedTest()
 
     return std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
+
+// /////////////////////////////////////////////////////////////////
+//
+// /////////////////////////////////////////////////////////////////
 
 int CSimdTest()
 {
@@ -157,12 +177,18 @@ int CSimdTest()
 
 int main(int, char **)
 {
+    std::cout << "-------------------------------------------" << std::endl;
+    std::cout << " Matrix size (M,N) = (" << M << "," << N << ")" << std::endl;
+    std::cout << "-------------------------------------------" << std::endl;
+    std::cout << "Method       |  Container     | Time       " << std::endl;
+    std::cout << "-------------------------------------------" << std::endl;
+
     std::map<std::string, std::function<int()> > f_list;
-    f_list["C-like       |  AlignedArray  | "] = CLikeTest;
-    f_list["C-helped     |  AlignedArray  | "] = CLikeHelpedTest;
-    f_list["C-omp        |  AlignedArray  | "] = COmpTest;
-    f_list["C-omp-helped |  AlignedArray  | "] = COmpHelpedTest;
-    f_list["C-simd       |  AlignedArray  | "] = CSimdTest;
+    f_list["C-pure       |  AlignedArray  | "] = CLikeTest;
+    f_list["C-blocked    |  AlignedArray  | "] = CLikeHelpedTest;
+    f_list["omp-pure     |  AlignedArray  | "] = COmpTest;
+    f_list["omp-blocked  |  AlignedArray  | "] = COmpHelpedTest;
+    f_list["simd-pure    |  AlignedArray  | "] = CSimdTest;
 
 
     std::vector<double> times(f_list.size());
@@ -176,7 +202,6 @@ int main(int, char **)
             times[count++] += func.second();
             if (std::fabs(res0 - (res- resu)) > 1.e-4)
                 std::cout << res - resu << " " << res0  << std::endl;
-
         }
     }
 
@@ -185,9 +210,6 @@ int main(int, char **)
     }
 
     int i = 0;
-    std::cout << "-------------------------------------------" << std::endl;
-    std::cout << "Method       |  Container     | Time       "    << std::endl;
-    std::cout << "-------------------------------------------" << std::endl;
     for (auto it : f_list) {
         std::cout << it.first << times[i++] << std::endl;
     }

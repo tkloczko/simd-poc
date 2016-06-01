@@ -169,9 +169,15 @@ int dotOmpAlignedArray()
 
 int main(int, char **)
 {
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << " Vector size = " << N << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+    std::cout << "Method  |     Container  |   Time"    << std::endl;
+    std::cout << "------------------------------------" << std::endl;
+
     std::map<std::string, std::function<int()> > f_list;
-    f_list["C-like  |  AlignedArray  | "] = dotClikeAlignedArray;
-    f_list["C-like  |   std::vector  | "] = dotClikeStdVector;
+    f_list["C-loop  |  AlignedArray  | "] = dotClikeAlignedArray;
+    f_list["C-loop  |   std::vector  | "] = dotClikeStdVector;
     f_list["Cpp     |   std::vector  | "] = dotCppStdVector;
     f_list["Cpp     |    std::array  | "] = dotCppStdArray;
     f_list["SIMD    |  AlignedArray  | "] = dotSimdAlignedArray;
@@ -194,9 +200,6 @@ int main(int, char **)
     }
 
     int i = 0;
-    std::cout << "------------------------------------" << std::endl;
-    std::cout << "Method  |     Container  |   Time"    << std::endl;
-    std::cout << "------------------------------------" << std::endl;
     for (auto it : f_list) {
         std::cout << it.first << times[i++] << std::endl;
     }
