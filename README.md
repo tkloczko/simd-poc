@@ -83,8 +83,8 @@ The inner product is performed **1000023 times** and the matrix size is **(M,N) 
 
 | Method       |     Container  |   Time (us) |
 |--------------|----------------|-------------|
-| C-blocked    |  AlignedArray  | 0.00805081  |
-| C-pure       |  AlignedArray  | 0.0103148   |
-| omp-blocked  |  AlignedArray  | 0.00827481  |
-| omp-pure     |  AlignedArray  | 0.0230035   |
-| simd-pure    |  AlignedArray  | 0.0107038   |
+| C-blocked    |  AlignedArray  | 0.00334492  |
+| C-pure       |  AlignedArray  | 0.0042179   |
+| omp-blocked  |  AlignedArray  | 0.00343892  |
+| omp-pure     |  AlignedArray  | 0.00653285  |
+| simd-pure    |  AlignedArray  | 0.0042989   |
