@@ -87,10 +87,10 @@ As one can see, for both cases Intel compiler with the **-xHOST** option enables
 
 On the other hand, GCC does not behave so well especially when dealing with nested loops. Adding the line `#pragma omp simd` enables to recover good performance for the inner product but for the matrix vector product, even after blocking the main loop, the gain remains poor compared to the code using intel intrinsics.
 
-Of course, such results need more investigations. We do not really know whether it is a bad use of GCC options (-Ofast works but as its edge effects make it irrelevant in our context) or just a lack of performance of the compiler. It may also depend on the cpu architecture.
+Of course, such results need more investigations. We do not really know whether it is a bad use of GCC options (-Ofast works but its edge effects make it irrelevant in our context) or just a lack of performance of the compiler. It may also depend on the cpu architecture.
 
 Let us also notice that without the -fopenmp option, pure C code provides better performance than with it. It seems that such a behaviour has already been identified for previous versions ([see here] (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60117)).
 
-Eventually, it is tricky to draw clear conclusions about the gain brought by OpenMP simd diretives. Using Intel compiler with -xHOST option provides very good results without any change in the original code. Using GCC provides some good gains but theses latter require some code modifications and they are far from the optimal ones.
+Eventually, it is tricky to draw clear conclusions about the gain brought by OpenMP simd directives. Using Intel compiler with -xHOST option provides very good results without any change in the original code. Using GCC provides some good gains but theses latter require some code modifications and they are far from the optimal ones.
 
 Comments and other tests are welcomed :-) !
