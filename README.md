@@ -39,7 +39,7 @@ Two compilers are tested:
 
 ## Inner Product
 
-The inner product is performed **1000023 times**, the vector size is **256**.
+The operation is performed **1000023 times**, the vector size is **256**.
 
 ### GCC 6.1.0
 
@@ -67,7 +67,7 @@ The inner product is performed **1000023 times**, the vector size is **256**.
 
 ## Matrix-Vector Multiplication
 
-The inner product is performed **1000023 times** and the matrix size is **(M,N) = (64,64)**.
+The operation is performed **1000023 times** and the matrix size is **(M,N) = (64,64)**.
 
 ### GCC 6.1.0
 
