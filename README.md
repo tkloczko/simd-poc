@@ -32,14 +32,14 @@ blocked in some functions. Moreover, only custom aligned array is
 used.
 
 Two compilers are tested:
-- GCC 6.1.0
-- Intel ICC 16.0.3
+- GCC 6.1.0 with following options -O3 -mavx2 -fopenmp
+- Intel ICC 16.0.3 with following options -O3 -xHOST -qopenmp
 
 # Results
 
 ## Inner Product
 
-The inner product is performed <strong>1000023 times</strong>, the vector size is <strong>256</strong>.
+The inner product is performed **1000023 times**, the vector size is **256**.
 
 ### GCC 6.1.0
 
@@ -54,19 +54,37 @@ The inner product is performed <strong>1000023 times</strong>, the vector size i
 
 ### Intel 16.0.3
 
+| Method  |     Container  |   Time (us) |
+|---------|----------------|-------------|
+| C-loop  |   std::vector  | 0.000319993 |
+| C-loop  |  AlignedArray  | 0.000551987 |
+| Cpp     |    std::array  | 0.000229995 |
+| Cpp     |   std::vector  | 0.000408991 |
+| OpenMP  |  AlignedArray  | 0.000268994 |
+| SIMD    |  AlignedArray  | 0.000283993 |
+
+
 
 ## Matrix-Vector Multiplication
 
-The inner product is performed 1000023 times.
+The inner product is performed **1000023 times** and the matrix size is **(M,N) = (64,64)**.
 
--------------------------------------------
-| Matrix size (M,N) = (64,64)             |
--------------------------------------------
-Method       |  Container     | Time
--------------------------------------------
-C-blocked    |  AlignedArray  | 1.01194
-C-pure       |  AlignedArray  | 3.02451
-omp-blocked  |  AlignedArray  | 0.0128367
-omp-pure     |  AlignedArray  | 1.01515
-simd-pure    |  AlignedArray  | 0.00412391
--------------------------------------------
+### GCC 6.1.0
+
+| Method       |     Container  |   Time (us) |
+|--------------|----------------|-------------|
+| C-blocked    |  AlignedArray  | 1.01194     |
+| C-pure       |  AlignedArray  | 3.02451     |
+| omp-blocked  |  AlignedArray  | 0.0128367   |
+| omp-pure     |  AlignedArray  | 1.01515     |
+| simd-pure    |  AlignedArray  | 0.00412391  |
+
+### Intel 16.0.3
+
+| Method       |     Container  |   Time (us) |
+|--------------|----------------|-------------|
+| C-blocked    |  AlignedArray  | 0.00805081  |
+| C-pure       |  AlignedArray  | 0.0103148   |
+| omp-blocked  |  AlignedArray  | 0.00827481  |
+| omp-pure     |  AlignedArray  | 0.0230035   |
+| simd-pure    |  AlignedArray  | 0.0107038   |
