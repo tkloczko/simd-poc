@@ -57,7 +57,6 @@ The operation is performed **1,000,023 times**, the vector size is **256**.
 | simd intrinsic |  AlignedArray  | 0.000283993 |
 
 
-
 ## Matrix-Vector Multiplication
 
 The operation is performed **1,000,023 times** and the matrix size is **(M,N) = (64,64)**.
