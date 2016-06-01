@@ -35,3 +35,41 @@ Two compilers are tested:
 - Intel ICC 16.0.3
 
 # Results
+
+## Inner Product
+
+The inner product is performed 1000023 times.
+
+### GCC 6.1.0
+
+------------------------------------------
+| Vector size = 256                      |
+------------------------------------------
+| Method  |     Container  |   Time (us) |
+------------------------------------------
+| C-loop  |   std::vector  | 0.00132797  |
+| C-loop  |  AlignedArray  | 0.00103898  |
+| Cpp     |    std::array  | 0.00140897  |
+| Cpp     |   std::vector  | 0.00123997  |
+| OpenMP  |  AlignedArray  | 0.000403991 |
+| SIMD    |  AlignedArray  | 0.000212995 |
+------------------------------------------
+
+### Intel 16.0.3
+
+
+## Matrix-Vector Multiplication
+
+The inner product is performed 1000023 times.
+
+-------------------------------------------
+| Matrix size (M,N) = (64,64)             |
+-------------------------------------------
+Method       |  Container     | Time
+-------------------------------------------
+C-blocked    |  AlignedArray  | 1.01194
+C-pure       |  AlignedArray  | 3.02451
+omp-blocked  |  AlignedArray  | 0.0128367
+omp-pure     |  AlignedArray  | 1.01515
+simd-pure    |  AlignedArray  | 0.00412391
+-------------------------------------------
