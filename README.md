@@ -38,22 +38,18 @@ Two compilers are tested:
 
 ## Inner Product
 
-The inner product is performed 1000023 times.
+The inner product is performed 1000023 times, the vector size is 256.
 
 ### GCC 6.1.0
 
-+----------------------------------------+
-| Vector size = 256                      |
-+---------+----------------+-------------+
 | Method  |     Container  |   Time (us) |
-+---------+----------------+-------------+
+|---------|----------------|-------------|
 | C-loop  |   std::vector  | 0.00132797  |
 | C-loop  |  AlignedArray  | 0.00103898  |
 | Cpp     |    std::array  | 0.00140897  |
 | Cpp     |   std::vector  | 0.00123997  |
 | OpenMP  |  AlignedArray  | 0.000403991 |
 | SIMD    |  AlignedArray  | 0.000212995 |
-+---------+----------------+-------------+
 
 ### Intel 16.0.3
 
