@@ -107,13 +107,6 @@ find_package(OpenMP REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
 ## #################################################################
-## Dependencies - external
-## #################################################################
-
-find_package(dtkContainers REQUIRED)
-include_directories(${dtkContainers_INCLUDE_DIRS})
-
-## #################################################################
 ##
 ## #################################################################
 
